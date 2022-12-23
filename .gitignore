@@ -58,3 +58,7 @@ tmp/
 local.properties
 .loadpath
 .factorypath
+########
+## testNG
+########
+test-output
