@@ -21,5 +21,15 @@ public class Payloads {
 				+ "    \"language\": \"French-IN\"\r\n"
 				+ "}";
 	}
+	
+	public static String updatePlace(String place_id) {
+		
+		return "{\r\n"
+				+ "\"place_id\":\""+place_id+"\",\r\n"
+				+ "\"address\":\"70 winter walk, USA\",\r\n"
+				+ "\"key\":\"qaclick123\"\r\n"
+				+ "}";
+		
+	}
 
 }
