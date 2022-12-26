@@ -1,16 +1,16 @@
 package restAssured;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import files.Payloads;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
+import testData.Payloads;
 
-public class CRUDAPI {
+
+public class CRUD_API {
 
 @Test()
 public void verifyAddPlaceAndUpdatePlaceAPI(){
@@ -22,8 +22,8 @@ public void verifyAddPlaceAndUpdatePlaceAPI(){
 		// validate if Add Place API is workimg as expected 
 		RestAssured.baseURI="https://rahulshettyacademy.com";
 		//post
-		String addPlaceResponse=given().log().all().queryParam("key", "qaclick123").header("Content-Type","application/json").body(Payloads.addPlace()).
-		 when().post("maps/api/place/add/json")
+		 String addPlaceResponse=given().log().all().queryParam("key", "qaclick123").header("Content-Type","application/json").body(Payloads.addPlace())
+		.when().post("maps/api/place/add/json")
 		.then().log().all().assertThat().statusCode(200).body("scope",equalTo("APP")).header("Server", "Apache/2.4.41 (Ubuntu)")
 		.extract().response().asString(); //extracting response and save it as string
 		

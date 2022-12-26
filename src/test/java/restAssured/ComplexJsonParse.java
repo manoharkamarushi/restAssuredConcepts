@@ -3,12 +3,11 @@ package restAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import files.Payloads;
 import io.restassured.path.json.JsonPath;
+import testData.Payloads;
 
 public class ComplexJsonParse {
-	
-	
+
 	@Test()
 	public void parseit() {
 		
