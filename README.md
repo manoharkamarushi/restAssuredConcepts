@@ -1,2 +1,2 @@
 # restAssured
-restAssured concepts
+restAssured basic concepts
