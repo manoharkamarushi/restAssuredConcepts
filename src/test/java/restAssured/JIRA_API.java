@@ -9,9 +9,13 @@ import io.restassured.path.json.JsonPath;
 
 import static io.restassured.RestAssured.*;
 
+import java.io.File;
+
 public class JIRA_API {
 	
 	SessionFilter session =null;
+	String issueID=null;
+	
 	
 	@BeforeTest
 	public void getSessionID() {
@@ -29,9 +33,8 @@ public class JIRA_API {
 	}
 	
 	@Test
-	public void createIssueAndAddComment() {
+	public void createIssue() {
 		
-		RestAssured.baseURI="http://localhost:8080/";
 		String response=given().header("Content-Type","application/json").body("{\r\n"
 				+ "    \"fields\": {\r\n"
 				+ "        \"project\": {\r\n"
@@ -48,9 +51,15 @@ public class JIRA_API {
 		then().log().all().assertThat().statusCode(201).extract().response().asString();
 		
 		JsonPath json = new JsonPath(response);
-		String issueID = json.get("id");
+		issueID = json.get("id");
 		
 	
+			
+	}
+	
+	@Test(dependsOnMethods = "createIssue")
+	public void addComment() {
+		
 		given().pathParam("Key", issueID).header("Content-Type","application/json").body("{\r\n"
 				+ "    \"body\": \"Comment Added1\",\r\n"
 				+ "    \"visibility\": {\r\n"
@@ -60,7 +69,17 @@ public class JIRA_API {
 				+ "}").log().all().filter(session).
 		when().post("rest/api/2/issue/{Key}/comment").
 		then().log().all().assertThat().statusCode(201);
+	}
+	
+	
+	@Test(dependsOnMethods = "createIssue")
+	public void addAttachment() {
 		
+		given().pathParam("Key", issueID).header("X-Atlassian-Token","no-check").log().all().filter(session).
+		header("Content-Type","multipart/form-data").multiPart("file",new File("jira.txt")).
+		when().post("/rest/api/2/issue/{Key}/attachments").
+		then().log().all().assertThat().statusCode(200);
+			
 	}
 	
 }
