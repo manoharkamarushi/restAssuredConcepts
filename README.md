@@ -1,2 +1,2 @@
 # restAssured
-restAssured BDD
+restAssured concepts
