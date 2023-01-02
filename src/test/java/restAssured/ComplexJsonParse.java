@@ -12,6 +12,7 @@ public class ComplexJsonParse {
 	public void parseit() {
 		
 			JsonPath json= new JsonPath(Payloads.complexjson());
+			
 //		    1. Print No of courses returned by API
 			int course_size=json.getInt("courses.size()");
 			System.out.println("No.of courses available:"+course_size);			
@@ -22,8 +23,8 @@ public class ComplexJsonParse {
 			
 //		    3. Print Title of the first course
 			System.out.println("Title of course 1 is :"+json.get("courses[0].title"));
-//		    4. Print All course titles and their respective Prices
 			
+//		    4. Print All course titles and their respective Prices
 			for(int i=0;i<course_size;i++) {
 				
 				String course = json.get("courses["+i+"].title");
@@ -34,11 +35,9 @@ public class ComplexJsonParse {
 			}
 			
 //		    5. Print no of copies sold by RPA Course
-			
 			System.out.println("no of copies sold by RPA Course:" + json.get("courses[2].copies"));
 			
 //		    6. Verify if Sum of all Course prices matches with Purchase Amount
-			
 			int totalPrice = 0,Price=0;
 			for(int i=0;i<course_size;i++) {
 				

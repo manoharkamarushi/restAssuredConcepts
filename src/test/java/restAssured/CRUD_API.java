@@ -16,7 +16,7 @@ public class CRUD_API {
 public void verifyAddPlaceAndUpdatePlaceAPI(){
 		
 //		given() - tells about what all input details have given to the api
-//		when() - how we are submitting the api
+//		when()  - how we are submitting the api
 //		then()  - what all validations doing on the response generated
 
 		// validate if Add Place API is workimg as expected 
